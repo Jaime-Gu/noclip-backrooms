@@ -1,0 +1,362 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+/* ==========================================================================
+   NOCLIP — custom styles (system fonts only, zero web fonts)
+   ==========================================================================*/
+
+@layer utilities {
+  .font-serif98 {
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .font-docmono {
+    font-family: ui-monospace, 'Courier New', Courier, monospace;
+  }
+}
+
+/* ---- 1998 beveled "table" look ---- */
+.bevel-out {
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #8a8570;
+  border-right: 2px solid #8a8570;
+}
+.bevel-in {
+  border-top: 2px solid #8a8570;
+  border-left: 2px solid #8a8570;
+  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+}
+.bevel-cell {
+  border: 1px solid #b8b29a;
+}
+
+/* royal-blue underlined 90s links */
+.nc-link {
+  color: #1d2bb8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.nc-link:hover {
+  color: #0000ee;
+}
+/* stage 1: one link's hover underline lands 3px off */
+.nc-link-off:hover {
+  text-decoration: none;
+  background-image: linear-gradient(#1d2bb8, #1d2bb8);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 calc(100% + 3px);
+}
+
+/* marquee */
+.nc-marquee {
+  animation: nc-scroll 18s linear infinite;
+}
+@keyframes nc-scroll {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* stage 2: the photo placeholder becomes yellow wallpaper for 2 frames */
+.nc-wallpaper-flash {
+  background: repeating-linear-gradient(
+    90deg,
+    #b8a356 0px,
+    #b8a356 4px,
+    #c9b464 4px,
+    #c9b464 8px
+  );
+}
+
+/* stage 5: the layout tiles loosen before the floor gives out */
+.nc-loosen .nc-tile {
+  animation: nc-loosen 2.6s ease-in forwards;
+}
+.nc-loosen .nc-tile:nth-child(2n) {
+  animation-delay: 0.15s;
+}
+.nc-loosen .nc-tile:nth-child(3n) {
+  animation-delay: 0.35s;
+}
+.nc-loosen .nc-tile:nth-child(4n) {
+  animation-delay: 0.6s;
+}
+@keyframes nc-loosen {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(0.4deg);
+  }
+  100% {
+    transform: translate(var(--fall-x, 6px), 90vh) rotate(var(--fall-r, 8deg));
+    opacity: 0.9;
+  }
+}
+.nc-tile:nth-child(2n) {
+  --fall-x: -9px;
+  --fall-r: -6deg;
+}
+.nc-tile:nth-child(3n) {
+  --fall-x: 4px;
+  --fall-r: 11deg;
+}
+
+/* ---- Act 2: detaching fragments ---- */
+.nc-fragment {
+  animation: nc-fragment-fall 1.5s ease-in forwards;
+  animation-delay: var(--delay);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+@keyframes nc-fragment-fall {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 130vh)) rotate(var(--r))
+      translateZ(300px);
+    opacity: 0;
+  }
+}
+.nc-bgfade {
+  animation: nc-bgfade 1.6s ease-in forwards;
+  z-index: 1;
+  opacity: 0;
+}
+@keyframes nc-bgfade {
+  to {
+    opacity: 1;
+  }
+}
+.nc-textfade {
+  animation: nc-textfade 0.8s ease forwards;
+}
+@keyframes nc-textfade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Level 0 HUD ---- */
+.nc-rec-dot {
+  animation: nc-recblink 1.4s steps(1) infinite;
+}
+@keyframes nc-recblink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.nc-timecode-glitch {
+  animation: nc-tcglitch 1.1s steps(2) infinite;
+  color: #e8d27a;
+}
+@keyframes nc-tcglitch {
+  0%,
+  70% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  71%,
+  80% {
+    transform: translateX(-2px);
+    opacity: 0.6;
+  }
+  81%,
+  90% {
+    transform: translateX(1px);
+  }
+  91%,
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ---- M.E.G. document sheet ---- */
+.nc-paper {
+  background-color: #f2edda;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 27px,
+    rgba(120, 110, 80, 0.14) 27px,
+    rgba(120, 110, 80, 0.14) 28px
+  );
+}
+.nc-coffee-ring {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    transparent 55%,
+    rgba(120, 84, 40, 0.13) 62%,
+    rgba(120, 84, 40, 0.2) 68%,
+    transparent 74%
+  );
+  pointer-events: none;
+}
+.nc-redact {
+  background: #15130d;
+  color: transparent;
+  cursor: crosshair;
+  padding: 0 2px;
+  user-select: none;
+  transition: color 0.05s;
+}
+.nc-redact.nc-redact-open {
+  background: #2a2618;
+  color: #d8d2b8;
+}
+
+/* ---- archive / logbook ---- */
+.nc-arch-link {
+  color: #8a9ab8;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+}
+.nc-arch-link:hover {
+  color: #c8d4e8;
+}
+.nc-board {
+  background-color: #17150f;
+  background-image: radial-gradient(rgba(255, 240, 200, 0.03) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.nc-scrap {
+  position: relative;
+  background-color: #e9e0b8;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 23px,
+    rgba(120, 100, 50, 0.12) 23px,
+    rgba(120, 100, 50, 0.12) 24px
+  );
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+}
+.nc-pin {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #e06060, #8a2020);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- photosensitivity: honor reduced motion everywhere ---- */
+@media (prefers-reduced-motion: reduce) {
+  .nc-marquee {
+    animation-duration: 60s;
+  }
+  .nc-loosen .nc-tile {
+    animation: none;
+  }
+  .nc-fragment {
+    animation: none;
+    opacity: 0;
+  }
+  .nc-rec-dot,
+  .nc-timecode-glitch {
+    animation: none;
+  }
+  .nc-wallpaper-flash {
+    background: #ccc;
+  }
+}
